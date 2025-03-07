@@ -1,5 +1,3 @@
-Here's the full markdown version of your `README.md` as one complete document:
-
 # Lavalink Bot Configuration Setup
 
 This README explains how to configure and run your Lavalink bot with the necessary settings in `config.js`. Lavalink is a powerful backend service for Discord music bots, enabling audio streaming capabilities.
