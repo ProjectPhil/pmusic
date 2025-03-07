@@ -1,4 +1,5 @@
-```markdown
+Here's the full markdown version of your `README.md` as one complete document:
+
 # Lavalink Bot Configuration Setup
 
 This README explains how to configure and run your Lavalink bot with the necessary settings in `config.js`. Lavalink is a powerful backend service for Discord music bots, enabling audio streaming capabilities.
@@ -41,7 +42,12 @@ This section defines the Lavalink node your bot will connect to. Lavalink needs 
 
 ```json
 "nodes": [
-    { "host": "", "port": 443, "password": "", "secure": false }
+    { 
+        "host": "", 
+        "port": 443, 
+        "password": "", 
+        "secure": false 
+    }
 ]
 ```
 
@@ -70,7 +76,12 @@ module.exports = {
         "oAuth2ClientID": "your-oauth2-client-id-here"
     },
     "nodes": [
-        { "host": "your-lavalink-server-host", "port": 443, "password": "your-lavalink-password", "secure": true }
+        { 
+            "host": "your-lavalink-server-host", 
+            "port": 443, 
+            "password": "your-lavalink-password", 
+            "secure": true 
+        }
     ]
 }
 ```
@@ -107,4 +118,3 @@ module.exports = {
 This project is governed by the [Project Phil Terms of Service](https://projectphil.co.uk/tos).
 
 For more information about Project Phil's terms of service, visit the link above.
-```
