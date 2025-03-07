@@ -40,12 +40,7 @@ This section defines the Lavalink node your bot will connect to. Lavalink needs 
 
 ```json
 "nodes": [
-    { 
-        "host": "", 
-        "port": 443, 
-        "password": "", 
-        "secure": false 
-    }
+    { "host": "", "port": 443, "password": "", "secure": false }
 ]
 ```
 
@@ -74,12 +69,7 @@ module.exports = {
         "oAuth2ClientID": "your-oauth2-client-id-here"
     },
     "nodes": [
-        { 
-            "host": "your-lavalink-server-host", 
-            "port": 443, 
-            "password": "your-lavalink-password", 
-            "secure": true 
-        }
+        { "host": "", "port": 443, "password": "", "secure": false }
     ]
 }
 ```
@@ -98,19 +88,15 @@ module.exports = {
 ---
 
 ## Troubleshooting
-
 - **Bot Fails to Connect to Lavalink**:
    - Ensure the Lavalink server is running.
    - Verify that the `host` and `port` settings in the `config.js` file are correct.
    - Confirm the `password` field matches the password set in the Lavalink server's `application.yml`.
    - If using SSL, ensure `secure` is set to `true`.
-
 - **Bot Not Responding in Discord**:
    - Double-check that the `discordBotToken` is correct.
    - Ensure the bot has sufficient permissions to join voice channels and send messages.
-
 ---
-
 ## License
 
 This project is governed by the [Project Phil Terms of Service](https://projectphil.co.uk/tos).
