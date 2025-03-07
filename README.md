@@ -1,5 +1,3 @@
-Got it! Here's the updated `README.md` with the license section referring to the Project Phil's Terms of Service:
-
 ```markdown
 # Lavalink Bot Configuration Setup
 
