@@ -1,0 +1,16 @@
+{
+    "name": "pmusic",
+    "version": "1.0.0",
+    "license": "https://projectphil.co.uk/tos",
+    "description": "A music bot for Discord",
+    "main": "index.js",
+    "dependencies": {
+        "colors": "^1.4.0",
+        "discord.js": "^14.14.1",
+        "express": "^4.19.2",
+        "figlet": "^1.7.0",
+        "fs": "^0.0.1-security",
+        "path": "^0.12.7",
+        "riffy": "^1.0.7-rc.2"
+    }
+}
