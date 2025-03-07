@@ -29,7 +29,6 @@ The `config.js` file contains the essential settings for the bot. Below is a det
     "oAuth2ClientID": ""     // Your OAuth2 client ID (if applicable)
 }
 ```
-
 #### Action:
 - Replace `discordBotToken` with your bot's token from the [Discord Developer Portal](https://discord.com/developers/applications).
 - If using OAuth2, replace `oAuth2ClientID` with your OAuth2 client ID.
@@ -43,7 +42,6 @@ This section defines the Lavalink node your bot will connect to. Lavalink needs 
     { "host": "", "port": 443, "password": "", "secure": false }
 ]
 ```
-
 - **host**: The IP or domain of the Lavalink server (e.g., `localhost` or a remote server).
 - **port**: The port for Lavalink (default is `443` for secure connections).
 - **password**: The password to authenticate with the Lavalink server. This must match the password configured in the Lavalink server's `application.yml` file.
@@ -56,9 +54,7 @@ This section defines the Lavalink node your bot will connect to. Lavalink needs 
 - Set `secure` to `true` for SSL, `false` for non-SSL.
 
 ---
-
 ## Example of Complete Configuration
-
 ```javascript
 module.exports = {
     "SiteInformation": {
@@ -75,18 +71,14 @@ module.exports = {
 ```
 
 ### Final Setup Steps
-
 1. **Set Up Lavalink Server**:
    - Before running the bot, make sure Lavalink is properly installed and running. You can follow the official [Lavalink setup guide](https://github.com/freyacodes/Lavalink).
-   
 2. **Update `config.js`**:
    - Modify the configuration file with your Lavalink server’s details, including the host, password, and port, as well as the Discord bot token.
-
 3. **Run the Bot**:
    - Once the configuration is complete, run your bot using the appropriate command (e.g., `node bot.js`).
 
 ---
-
 ## Troubleshooting
 - **Bot Fails to Connect to Lavalink**:
    - Ensure the Lavalink server is running.
