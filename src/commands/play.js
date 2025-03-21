@@ -5,40 +5,50 @@
  */
 
 module.exports.run = async function (bot, con, interaction, data) {
-    let serverUUID = interaction.options.getString('server_uuid');
-    con.query(`SELECT * FROM modules WHERE uuid = ?`, [serverUUID], function (e, rows) {
-        if (e) return interaction.reply({ content: `An error occurred while querying the database: ${e.message}`, flags: 64 });
-        if (!rows.length) return interaction.reply({ content: "No server found with that UUID.", flags: 64 });
-        GetMcInfo(rows, interaction, "/v1/players/all").then(function (data) {
-            console.log(data);
+    const query = interaction.options.getString('track'); // Get the track name or URL from the interaction
 
-            // Create chart with player data
-            bot.chart.create({
-                interaction: interaction,
-                title: 'Joined Players Info',
-                color: '#00FF00',
-                fields: data.map(function (playerData) {
-                    let lastPlayed = playerData.lastPlayed.toString().slice(0, -3);
-                    return {
-                        name: `${playerData.name}'s Info`,
-                        value: `**UUID**: \`${playerData.uuid}\`\n**Whitelisted**: \`${playerData.whitelisted}\`\n**Banned**: \`${playerData.banned}\`\n**Operator**: \`${playerData.op}\`\n**Last Played**: <t:${lastPlayed}:R>`,
-                        inline: false
-                    };
-                }),
-                timestamp: true
-            }).catch(function (e) {
-                return interaction.reply({ content: `An error occurred while creating the chart: ${e.message}`, flags: 64 });
-            });
-        }).catch(function (e) {
-            interaction.reply({ content: `An error occurred while fetching Minecraft info: ${e.message}`, flags: 64 });
-        });
+    const member = interaction.member; // Get the member who invoked the command
+    const voiceChannel = member.voice.channel; // Get the voice channel of the member
+
+    if (!voiceChannel) {
+        return interaction.reply({ content: "You need to be in a voice channel to play music!", ephemeral: true });
+    }
+
+    const player = bot.riffy.createConnection({
+        guildId: interaction.guild.id,
+        voiceChannel: voiceChannel.id,
+        textChannel: interaction.channel.id,
+        deaf: true
     });
+
+    const resolve = await bot.riffy.resolve({ query: query, requester: interaction.user });
+    const { loadType, tracks, playlistInfo } = resolve;
+
+    if (loadType === 'playlist') {
+        for (const track of tracks) {
+            track.info.requester = interaction.user;
+            player.queue.add(track);
+        }
+
+        await interaction.reply({ content: `Added: \`${tracks.length} tracks\` from \`${playlistInfo.name}\`` });
+        if (!player.playing && !player.paused) return player.play();
+
+    } else if (loadType === 'search' || loadType === 'track') {
+        const track = tracks.shift();
+        track.info.requester = interaction.user;
+
+        player.queue.add(track);
+        await interaction.reply({ content: `Added: \`${track.info.title}\`` });
+        if (!player.playing && !player.paused) return player.play();
+    } else {
+        return interaction.reply({ content: 'There are no results found.', ephemeral: true });
+    }
 }
 
 module.exports.info = {
-    name: 'mc-joinedplayers',
-    description: "Get All Players Info",
+    name: 'play',
+    description: "Play a music track",
     options: [
-        { name: 'server_uuid', description: 'Server UUID', type: 3, required: true }
+        { name: 'track', description: 'Track name or URL', type: 3, required: true }
     ]
 }
